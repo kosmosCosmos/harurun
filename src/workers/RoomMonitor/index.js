@@ -1,0 +1,1 @@
+export fetchRoomInfoes from './fetchRoomInfoes';

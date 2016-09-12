@@ -1,0 +1,50 @@
+{
+  "sessionSecret": "please_replace_it_when_you_deploy",
+  "authKey": "please_replace_it_when_you_deploy",
+  "stockRoomsVersion": 3,
+  "stockRooms": [
+    {
+      "provider": "zhanqi",
+      "id": 33968,
+      "alias": "akb49房间",
+      "is48g": true,
+      "highlight": true
+    },
+    {
+      "provider": "zhanqi",
+      "id": 33967,
+      "alias": "ske48房间",
+      "is48g": true
+    },
+    {
+      "provider": "zhanqi",
+      "id": 40183,
+      "alias": "nmb48房间",
+      "is48g": true
+    },
+    {
+      "provider": "zhanqi",
+      "id": 83706,
+      "alias": "hkt48房间",
+      "is48g": true
+    },
+    {
+      "provider": "zhanqi",
+      "id": 111747,
+      "alias": "ngt48房间",
+      "is48g": true
+    },
+    {
+      "provider": "bilibili",
+      "id": 45104,
+      "alias": "泪腺战士",
+      "is48g": false
+    },
+    {
+      "provider": "bilibili",
+      "id": 272811,
+      "alias": "懒惰的Tomi",
+      "is48g": false
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+#!/usr/bin/env node
+// var debug = require('debug')('MODULE_NAME');
+// var app = require('../app');
+import app from '../app';
+// import store from '../src/memoryStore';
+import {
+  PerformanceStorage,
+  StockRoomsStorage,
+  // LegacyRoomsStorage,
+} from '../src/server/storage';
+import fs from 'fs';
+
+app.set('port', process.env.PORT || 8080);
+
+const server = app.listen(app.get('port'), () => {
+  console.log(`Express server listening on port ${server.address().port}`);
+});
+
+
+// register backend workers
+// import akb48ScheduleWorker from '../src/workers/ScheduleMonitor/akb48';
+
+import {
+  fetchAKB48Schedule,
+  fetchHKT48Schedule,
+  fetchSKE48Schedule,
+ } from '../src/workers/ScheduleMonitor';
+
+import roomInfoFetcher from '../src/workers/roomInfoFetcher';
+// import { stockRooms } from '../config';
+// import { fetchRoomInfoes } from '../src/workers/RoomMonitor';
+// const stockRooms48 = stockRooms.filter(sr => sr.is48g);
+
+const sleep = (timeout) => new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve();
+  }, timeout);
+});
+
+const getNextTimeout = () => {
+  return 600000;
+};
+
+const timeoutTable = {
+  rooms: 300 * 1000,
+};
+
+
+// (async () => {
+//   while (true) {
+//     try {
+//       const rooms = await fetchRoomInfoes(stockRooms48);
+//       LegacyRoomsStorage.set(rooms);
+//       console.log(rooms);
+//     }
+//     catch (e) {
+//       console.log(e);
+//     }
+//     await sleep(timeoutTable.rooms);
+//   }
+// })();
+
+
+(async () => {
+  while (true) {
+    try {
+      const result = await fetchAKB48Schedule();
+      PerformanceStorage.set('akb48', result);
+      // store.performance.akb48 = result;
+      console.log('akb48 updated');
+    }
+    catch(e) {
+      fs.appendFile('debug.txt', JSON.stringify(e, null, 2));
+    }
+    const timeout = getNextTimeout();
+    // console.log(store);
+    console.log(PerformanceStorage.getAll());
+    await sleep(timeout);
+  }
+})();
+
+(async () => {
+  while (true) {
+    try {
+      const result = await fetchHKT48Schedule();
+      PerformanceStorage.set('hkt48', result);
+      // store.performance.hkt48 = result;
+      console.log('hkt48 updated');
+    }
+    catch(e) {
+      fs.appendFile('debug.txt', JSON.stringify(e, null, 2));
+    }
+    const timeout = getNextTimeout();
+    console.log(PerformanceStorage.getAll());
+    await sleep(timeout);
+  }
+})();
+
+(async () => {
+  while (true) {
+    try {
+      const result = await fetchSKE48Schedule();
+      PerformanceStorage.set('ske48', result);
+      // store.performance.ske48 = result;
+      console.log('ske48 updated');
+    }
+    catch(e) {
+      fs.appendFile('debug.txt', JSON.stringify(e, null, 2));
+    }
+    const timeout = getNextTimeout();
+    await sleep(timeout);
+    }
+})();
+
+(async () => {
+  while (true) {
+    try {
+      const roomInfoes = await roomInfoFetcher();
+      StockRoomsStorage.set(roomInfoes);
+    }
+    catch (e) {
+      fs.appendFile('debug.txt', JSON.stringify(e, null, 2));
+    }
+    const timeout = getNextTimeout();
+    await sleep(timeout);
+  }
+})();
+

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  #react-container
+
+  script.
+    window.store = !{store};
+    window.authenticated = !{authenticated}
+
+  script(src='/build/main.js')
