@@ -9,8 +9,10 @@ import {
   // LegacyRoomsStorage,
 } from '../src/server/storage';
 import fs from 'fs';
+import { port } from '../config';
 
-app.set('port', process.env.PORT || 8080);
+const serverPort = process.env.PORT || port || 8080;
+app.set('port', serverPort);
 
 const server = app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${server.address().port}`);
