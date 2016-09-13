@@ -15,7 +15,9 @@ const recover = () => {
     // console.log('load from cached', _schedules);
   }
   catch(e) {
-    console.log(e);
+    // console.log(e);
+    console.log('Can\'t find caches/schedules.json fill schedules with empty array.');
+    _schedules = [];
   }
 };
 
