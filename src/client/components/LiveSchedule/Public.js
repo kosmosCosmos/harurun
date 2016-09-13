@@ -139,7 +139,7 @@ const LiveSchedulePublic = (props) => (
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div className="headerBanner row start-xs start-sm start-md start-lg" >
             <div className="headerImage col-xs-0 col-sm-0 col-md-5 col-lg-6">
-              <img alt="discography image" src="images/cover1400x1400.jpeg" />
+              <img alt="discography image" src="images/single8th.jpg" />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-7 col-lg-6">
 
