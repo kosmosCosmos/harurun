@@ -13,7 +13,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+// app.use(logger('dev'));
+app.get('/', (req, res, next) => {
+  console.log(req.headers['user-agent']);
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

@@ -44,7 +44,7 @@ router.get('*', (req, res, next) => {
     };
   }
 
-  console.log('sessionId:', req.sessionID);
+  // console.log('sessionId:', req.sessionID);
   // console.log('test');
   const isClientRoute = ClientRoutes.includes(req.originalUrl.toLowerCase());
   if (!isClientRoute) {
