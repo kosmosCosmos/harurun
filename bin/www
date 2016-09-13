@@ -40,7 +40,7 @@ const sleep = (timeout) => new Promise((resolve, reject) => {
 });
 
 const getNextTimeout = () => {
-  return 600000;
+  return 60 * 60 * 1000;
 };
 
 const timeoutTable = {
@@ -76,7 +76,7 @@ const timeoutTable = {
     }
     const timeout = getNextTimeout();
     // console.log(store);
-    console.log(PerformanceStorage.getAll());
+    // console.log(PerformanceStorage.getAll());
     await sleep(timeout);
   }
 })();
@@ -93,7 +93,7 @@ const timeoutTable = {
       fs.appendFile('debug.txt', JSON.stringify(e, null, 2));
     }
     const timeout = getNextTimeout();
-    console.log(PerformanceStorage.getAll());
+    // console.log(PerformanceStorage.getAll());
     await sleep(timeout);
   }
 })();

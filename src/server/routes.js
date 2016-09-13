@@ -39,7 +39,6 @@ router.use('/api/manage/schedule', schedule);
 // handle client routes
 router.get('*', (req, res, next) => {
   if (!req.session.user) {
-    console.log('reset session.user "!!!!!');
     req.session.user = {
       authenticated: false,
     };
@@ -48,19 +47,13 @@ router.get('*', (req, res, next) => {
   console.log('sessionId:', req.sessionID);
   // console.log('test');
   const isClientRoute = ClientRoutes.includes(req.originalUrl.toLowerCase());
-  // console.log(req.originalUrl);
   if (!isClientRoute) {
-    console.log('not client route');
     return next();
   }
 
   const storeData = store.getAll();
   const storeDataString = JSON.stringify(storeData);
-  // const roomsString = JSON.stringify(rooms);
-  console.log('try set isAuthenticated---------');
-  console.log(req.session);
   const authenticated = req.session.user.authenticated;
-  // console.log(storeData);
   return res.render('index', { title: 'Main', store: storeDataString, authenticated });
 });
 
