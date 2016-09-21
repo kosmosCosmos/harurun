@@ -61,9 +61,6 @@ const renderPerformancePanels = () => {
     let date;
 
     if (!schedule) {
-      title = '尚未抓取';
-    }
-    else if (schedule.length === 0){
       title = '休馆日';
     }
     else {

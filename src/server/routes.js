@@ -24,10 +24,6 @@ const definedRoutes = [
 // handle restful apis
 router.get('/api/miichan/:guid/:currentVersion', miichan);
 
-// handle restful apis(legacy)
-// router.get('/api/room');
-// router.get('/api/schedules');
-
 // prepare session for non-api routes
 router.use(session({
   store: new FileStore({}),

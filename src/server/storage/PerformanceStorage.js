@@ -1,4 +1,4 @@
-const _performance = {};
+let _performance = {};
 
 export default {
   getAll: () => {
@@ -6,5 +6,8 @@ export default {
   },
   set: (group, data) => {
     _performance[group] = data;
+  },
+  setAll: (performance) => {
+    _performance = performance;
   },
 };
