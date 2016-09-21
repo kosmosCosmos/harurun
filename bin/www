@@ -1,12 +1,8 @@
 #!/usr/bin/env node
-// var debug = require('debug')('MODULE_NAME');
-// var app = require('../app');
 import app from '../app';
-// import store from '../src/memoryStore';
 import {
   PerformanceStorage,
   StockRoomsStorage,
-  // LegacyRoomsStorage,
 } from '../src/server/storage';
 import fs from 'fs';
 import { port } from '../config';
