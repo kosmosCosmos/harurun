@@ -95,7 +95,7 @@ const renderPerformancePanels = () => {
 
 const renderScheduleList = () => {
   // build mdText
-  const { schedules } = window.store;
+  const { schedules: { data: schedules } } = window.store;
   if (!schedules) {
     return null;
   }
