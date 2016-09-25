@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
+import request from 'superagent';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import request from 'superagent';
 import DatePicker from 'material-ui/DatePicker';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
@@ -66,9 +66,24 @@ export default class LiveScheduleManager extends React.Component {
   }
 
   createChangeRoomHandler(schedule) {
-    return (event, selectionIndex, roomId) => {
-      const { schedules } = this.state;
-      schedule.roomId = roomId;
+    return (event, selectionIndex, roomKey) => {
+      const { schedules, rooms } = this.state;
+
+      const room = rooms.find(r => roomKey === this._getRoomKey(r));
+      if (!room) {
+        console.error(`Can not find matched room for ${roomKey} in`, rooms);
+        const messageText = '找不到对应的直播间信息';
+        this.setState({
+          messageText,
+          showMessage: true,
+        });
+        return;
+      }
+
+      schedule.roomKey = roomKey;
+      schedule.roomId = room.id;
+      schedule.roomProvider = room.provider;
+      schedule.roomAlias = room.alias;
       schedule.isEmpty = false;
 
       const newSchedules = this.addEmptyRow(schedules);
@@ -90,7 +105,7 @@ export default class LiveScheduleManager extends React.Component {
 
   createTimeChangeHandler(schedule) {
     return (event, timeString) => {
-      const { schedules, validateResult } = this.state;
+      const { schedules } = this.state;
       const scheduleTime = this._parseScheduleTime(timeString);
 
       schedule.time = timeString;
@@ -117,6 +132,9 @@ export default class LiveScheduleManager extends React.Component {
   }
 
   addEmptyRow(schedules) {
+    const { rooms } = this.state;
+
+    // if the last schedule is already an empty schedule do not init it, just retrun.
     if (schedules
       && schedules.length > 0
       && schedules[schedules.length - 1].isEmpty) {
@@ -132,12 +150,25 @@ export default class LiveScheduleManager extends React.Component {
       lastDate = lastSchedule.date;
     }
 
+    // get default roomKey
+    if (!rooms || rooms.length === 0) {
+      return this.setState({
+        messageText: '获取直播间信息失败',
+        showMessage: true,
+      });
+    }
+    const defaultRoom = rooms[0];
+    const roomKey = this._getRoomKey(defaultRoom);
+
     newSchedules.push({
       date: lastDate,
       time: '',
       timeValidate: false,
       description: '',
-      roomId: 0,
+      roomKey,
+      roomId: defaultRoom.id,
+      roomProvider: defaultRoom.provider,
+      roomAlias: defaultRoom.alias,
       isEmpty: true,
     });
 
@@ -153,7 +184,7 @@ export default class LiveScheduleManager extends React.Component {
           // validate time string
           const validateResult = this._parseScheduleTime(schedule.time);
           schedule.validated = validateResult.validated;
-        })
+        });
 
         this.setState({ schedules: this.addEmptyRow(schedules) });
       });
@@ -208,6 +239,10 @@ export default class LiveScheduleManager extends React.Component {
           showMessage: true,
         });
       });
+  }
+
+  _getRoomKey(room) {
+    return `${room.provider}#${room.id}`;
   }
 
   _purifySchedules(schedules) {
@@ -291,16 +326,14 @@ export default class LiveScheduleManager extends React.Component {
     return result;
   }
 
-
   renderRoomDropdownList() {
     const { rooms } = this.state;
     const result = rooms.map(room => {
-      const roomKey = room.id;
+      const roomKey = this._getRoomKey(room);
       return (
-        <MenuItem key={roomKey} value={room.id} primaryText={room.alias} />
+        <MenuItem key={roomKey} value={roomKey} primaryText={room.alias} />
       );
     });
-
     return result;
   }
 
@@ -349,7 +382,7 @@ export default class LiveScheduleManager extends React.Component {
                   />
 
                   <SelectField
-                    value={sch.roomId}
+                    value={sch.roomKey}
                     style={{ width: '150px', display: 'inline-block', verticalAlign: 'middle', height: '52px' }}
                     onChange={this.createChangeRoomHandler(sch)}
                   >
