@@ -179,7 +179,7 @@ export default class LiveScheduleManager extends React.Component {
     request
       .get('/api/manage/schedule')
       .end((err, res) => {
-        const schedules = res.body;
+        const schedules = res.body.data;
         schedules.forEach(schedule => {
           // validate time string
           const validateResult = this._parseScheduleTime(schedule.time);
