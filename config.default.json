@@ -1,8 +1,9 @@
 {
   "port": 8134,
+  "currentExtensionVersion": "1.0.0",
   "sessionSecret": "please_replace_it_when_you_deploy",
   "authKey": "please_replace_it_when_you_deploy",
-  "stockRoomsVersion": 3,
+  "stockRoomsVersion": "3",
   "stockRooms": [
     {
       "provider": "zhanqi",

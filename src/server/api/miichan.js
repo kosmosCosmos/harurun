@@ -2,16 +2,26 @@
 
 import StockRoomsStorage from '../storage/StockRoomsStorage';
 import SchedulesStorage from '../storage/ScheduleStorage';
-
+import UserStorage from '../storage/UserStorage';
+import { currentExtensionVersion } from '../../../config';
 
 export default function (req, res, next) {
   // (params, location, route);
-  console.log('in miichan');
+  const { uid } = req.params;
+  console.log('in miichan:', uid);
 
-  const { currentVersion } = req.params;
+  const {
+    extensionVersion,
+    schedulesVersion,
+    stockRoomsVersion,
+    userDetails,
+  } = req.body;
 
   const result = {
     status: 'ok',
+    extension: {
+      status: 'ok',
+    },
     room: {
       status: 'ok',
     },
@@ -23,13 +33,27 @@ export default function (req, res, next) {
   const storage = StockRoomsStorage.get();
   const schedules = SchedulesStorage.get();
 
-  if (+currentVersion !== storage.stockRoomsVersion) {
+  if (extensionVersion !== currentExtensionVersion) {
+    result.extension.status = 'update';
+    result.extension.currentExtensionVersion = currentExtensionVersion;
+  }
+
+  if (stockRoomsVersion !== storage.stockRoomsVersion) {
     result.room.status = 'update';
     result.room.stockRoomsVersion = storage.stockRoomsVersion;
     result.room.stockRooms = storage.stockRooms;
   }
 
-  result.schedule.status = 'update';
-  result.schedule.list = schedules;
+  if (schedulesVersion !== schedules.timestamp) {
+    result.schedule.status = 'update';
+    result.schedule.timestamp = schedules.timestamp;
+    result.schedule.data = schedules.data;
+  }
+
+  // update user info to storage
+  const currentUser = userDetails || {};
+  currentUser.uid = uid;
+  UserStorage.set(currentUser);
+
   res.send(result);
 }

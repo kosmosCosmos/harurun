@@ -22,7 +22,7 @@ const definedRoutes = [
 
 
 // handle restful apis
-router.get('/api/miichan/:guid/:currentVersion', miichan);
+router.use('/api/miichan/:uid', miichan);
 
 // prepare session for non-api routes
 router.use(session({

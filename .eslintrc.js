@@ -5,6 +5,7 @@ module.exports = {
         "react"
     ],
     "rules": {
-      "no-param-reassign": 1
+      "no-param-reassign": 1,
+      "brace-style": 0,
     }
 };
