@@ -2,7 +2,10 @@ var webpack = require('webpack');
 
 var definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
-  __PRERELEASE__: JSON.stringify(JSON.parse(process.env.BUILD_PRERELEASE || 'false'))
+  __PRERELEASE__: JSON.stringify(JSON.parse(process.env.BUILD_PRERELEASE || 'false')),
+  'process.env': {
+    NODE_ENV: JSON.stringify('production'),
+  },
 });
 
 var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');

@@ -2,11 +2,8 @@ doctype html
 html
   head
     title= title
-    //- link(rel='stylesheet', href='/stylesheets/flexboxgrid.min.css')
     link(rel='stylesheet', href='/stylesheets/mui-github-markdown.css')
     link(rel='stylesheet', href='/stylesheets/prop-type-description.css')
-    //- link(rel='stylesheet', href='/stylesheets/custom.css')
-    //- link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='/build/common.js')
     style.
       html{
@@ -15,6 +12,9 @@ html
       .markdown-body table tr,
       .propTypeDescription table tr:nth-child(2n) {
         background-color: transparent;
+      }
+      .propTypeDescription table td {
+        font-family: "noto sans" !important;
       }
       .propTypeDescription table th:first-child {
         width: 150px;
