@@ -5,16 +5,6 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 
-
-// const mdText = `
-//   |日期 |时间 |节目 |
-//   |:---|:---|:---|
-//   | 6/10 akb49房间 | 19:00~19:54 | ミュージックステーション　乃木坂46 |
-//   | 6/10 akb49房间 | 20:00~21:00 | ひぐらしのなく頃に 第4話 |
-//   | 6/10 akb49房间 | 23:50～0:20 |『ぷっ』すま　生田絵梨花 |
-//   | 6/10 akb49房间 | 0:05～1:05 | バズリズム　AKB48 |
-// `;
-
 const ScheduleMetadata = [
   {
     key: 'akb48',
@@ -70,7 +60,11 @@ const renderPerformancePanels = () => {
     }
 
     return (
-      <div key={meta.key} className="col-xs-12 col-sm-6 col-md-6 col-lg-3" style={{ paddingBottom: 16 }}>
+      <div
+        key={meta.key}
+        className="col-xs-12 col-sm-6 col-md-6 col-lg-3"
+        style={{ paddingBottom: 16 }}
+      >
         <Card className="box">
           <CardHeader
             style={{ textAlign: 'left' }}
@@ -82,15 +76,11 @@ const renderPerformancePanels = () => {
           <CardText>
             {members}
           </CardText>
-          <CardActions>
-          </CardActions>
+          <CardActions />
         </Card>
       </div>
     );
-
   });
-            // <FlatButton label="开启通知" disabled={true} />
-
 };
 
 const renderScheduleList = () => {
@@ -104,9 +94,7 @@ const renderScheduleList = () => {
 
   const mdText = schedules.reduce((a, b) => {
     const dateStr = b.date.replace(/^\d+-/, '').replace('-', '/');
-    // todo
-    const roomStr = 'akb49房间';
-    const bStr = `| ${dateStr} ${roomStr} | ${b.time} | ${b.description} |`;
+    const bStr = `| ${dateStr} ${b.roomAlias} | ${b.time} | ${b.description} |`;
     const next = a + '\n' + bStr;
     return next;
   }, mdTextHeader);
@@ -124,7 +112,11 @@ const renderRoomButtons = () => {
 
   return rooms.map(room => {
     const url = `http://www.zhanqi.tv/${room.domain}`;
-    return <a key={room.id} target="_blank" href={url}><RaisedButton label={room.title} secondary={room.highlight} /></a>;
+    return (
+      <a key={room.id} target="_blank" href={url}>
+        <RaisedButton label={room.title} secondary={room.highlight} />
+      </a>
+    );
   });
 };
 
@@ -164,19 +156,24 @@ const LiveSchedulePublic = (props) => (
             <CardText>
               <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                  <FlatButton
-                    style={{ width: 96, height: 96 }}
-                    icon={<img src="/images/app-chromium.png" />}
-                  />
+
+                  <a target="__blank" href="/downloads/gyaruppi_1.0.4.crx">
+                    <FlatButton
+                      style={{ width: 96, height: 96 }}
+                      icon={<img src="/images/app-chromium.png" />}
+                    />
+                  </a>
 
                   <div>直接下载</div>
                   <div>兼容Chromium系浏览器</div>
                 </div>
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                  <FlatButton
-                    style={{ width: 96, height: 96 }}
-                    icon={<img src="/images/app-webstore.png" />}
-                  />
+                  <a target="__blank" href="https://chrome.google.com/webstore/detail/gyaruppi/ghnfiadioahomhmocmhgjhpmhcmcggjg">
+                    <FlatButton
+                      style={{ width: 96, height: 96 }}
+                      icon={<img src="/images/app-webstore.png" />}
+                    />
+                  </a>
                   <div>市场安装</div>
                 </div>
               </div>
@@ -184,9 +181,7 @@ const LiveSchedulePublic = (props) => (
           </Card>
         </div>
       </div>
-
     </div>
-
 
     <Paper className="page">
       <div className="row center-xs center-sm center-md center-lg">

@@ -24,7 +24,6 @@ const setSchedules = (req, res, next) => {
   });
 };
 
-
 export default (req, res, next) => {
   if (req.method === 'GET') {
     return getSchedules(req, res, next);

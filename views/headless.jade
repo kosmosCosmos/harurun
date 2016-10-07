@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title= title
+    //- link(rel='stylesheet', href='/stylesheets/flexboxgrid.min.css')
+    link(rel='stylesheet', href='/stylesheets/mui-github-markdown.css')
+    link(rel='stylesheet', href='/stylesheets/prop-type-description.css')
+    //- link(rel='stylesheet', href='/stylesheets/custom.css')
+    //- link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/build/common.js')
+    style.
+      html{
+        width: 800px;
+      }
+      .markdown-body table tr,
+      .propTypeDescription table tr:nth-child(2n) {
+        background-color: transparent;
+      }
+      .propTypeDescription table th:first-child {
+        width: 150px;
+      }
+  body
+    block content
+      #react-container
+
+      script.
+        window.store = !{store};
+
+      script(src='/build/main.js')

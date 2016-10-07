@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { generateSchedulesImage } from '../../utils';
 const cacheFilePath = path.join(__dirname, '../../../caches/schedules.json');
 let scheduleData = {
   timestamp: null,
@@ -39,5 +40,6 @@ export default {
     scheduleData.timestamp = new Date().getTime();
     scheduleData.data = schedules;
     persist();
+    generateSchedulesImage();
   },
 };

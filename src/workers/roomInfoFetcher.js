@@ -32,7 +32,6 @@ const getRoomInfoPromise = (room) =>
     });
   });
 
-
 export default () => new Promise((resolve, reject) => {
   const tasks = config.stockRooms.filter(c => c.is48g).map(r => {
     return getRoomInfoPromise(r);

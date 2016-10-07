@@ -55,4 +55,3 @@ const getNextTimeout = () => {
     await sleep(timeout);
   }
 })();
-

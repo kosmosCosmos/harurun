@@ -4,19 +4,22 @@
   "sessionSecret": "please_replace_it_when_you_deploy",
   "authKey": "please_replace_it_when_you_deploy",
   "stockRoomsVersion": "3",
+  "scheduleListSnapshotTimeout": 30000,
   "stockRooms": [
     {
       "provider": "zhanqi",
       "id": 33968,
       "alias": "akb49房间",
       "is48g": true,
-      "highlight": true
+      "highlight": true,
+      "locked": true
     },
     {
       "provider": "zhanqi",
       "id": 33967,
       "alias": "ske48房间",
-      "is48g": true
+      "is48g": true,
+      "locked": true
     },
     {
       "provider": "zhanqi",

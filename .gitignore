@@ -2,7 +2,9 @@
 node_modules
 sessions/
 public/build
+public/images/schedules.png
 npm-debug.log
 config.json
 debug.txt
 caches/schedules.json
+caches/users.json

@@ -13,13 +13,19 @@ const definedRoutes = [
   {
     path: '/',
     title: '48系番组直播间',
+    template: 'index',
   },
   {
     path: '/manage',
     title: '番组表编辑',
+    template: 'manage',
+  },
+  {
+    path: '/headless',
+    title: 'headless schedule list',
+    template: 'headless',
   },
 ];
-
 
 // handle restful apis
 router.use('/api/miichan/:uid', miichan);
@@ -38,6 +44,10 @@ router.use(session({
 // handle stateful api
 router.post('/api/auth', auth);
 router.use('/api/manage/schedule', schedule);
+
+// handle schedule
+// router.get('/headless', null);
+// router.get('/schedule.png', null);
 
 // handle client routes
 router.get('*', (req, res, next) => {
@@ -58,7 +68,7 @@ router.get('*', (req, res, next) => {
   const storeData = store.getAll();
   const storeDataString = JSON.stringify(storeData);
   const authenticated = req.session.user.authenticated;
-  return res.render('index', { title: matchedRoute.title, store: storeDataString, authenticated });
+  return res.render(matchedRoute.template, { title: matchedRoute.title, store: storeDataString, authenticated });
 });
 
 

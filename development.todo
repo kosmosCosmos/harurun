@@ -1,9 +1,10 @@
- ☐ persist schedule storage
+ ✔ persist schedule storage @done (16-10-07 15:12)
  ☐ add web clip icon
  https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html
+ ☐ // todo move cachefilepath to config.json
+ ☐ // todo extract persist/recover method
 
 
 
 
-
- ☐ clear unused packages
+ ✔ clear unused packages @done (16-10-07 15:26)

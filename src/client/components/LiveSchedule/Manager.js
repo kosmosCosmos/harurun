@@ -11,7 +11,6 @@ import SelectField from 'material-ui/SelectField';
 import CancelIcon from 'material-ui/svg-icons/navigation/cancel';
 import Snackbar from 'material-ui/Snackbar';
 
-
 export default class LiveScheduleManager extends React.Component {
 
   constructor(props) {
@@ -71,7 +70,6 @@ export default class LiveScheduleManager extends React.Component {
 
       const room = rooms.find(r => roomKey === this._getRoomKey(r));
       if (!room) {
-        console.error(`Can not find matched room for ${roomKey} in`, rooms);
         const messageText = '找不到对应的直播间信息';
         this.setState({
           messageText,
@@ -206,7 +204,6 @@ export default class LiveScheduleManager extends React.Component {
   }
 
   messageCloseHandler() {
-    console.log('messageCloseHandler');
     this.setState({
       showMessage: false,
     });
@@ -280,7 +277,7 @@ export default class LiveScheduleManager extends React.Component {
     return `${year}-${month}-${date}`;
   }
 
-  _parseDateStringToDate(dateString){
+  _parseDateStringToDate(dateString) {
     if (!dateString) {
       return null;
     }
@@ -295,8 +292,8 @@ export default class LiveScheduleManager extends React.Component {
     return result;
   }
 
-  _parseScheduleTime(timeString){
-    const validateRegex =  /^([0-9]?[0-9]):([0-5][0-9])~([0-9]?[0-9]):([0-5][0-9])$/;
+  _parseScheduleTime(timeString) {
+    const validateRegex = /^([0-9]?[0-9]):([0-5][0-9])~([0-9]?[0-9]):([0-5][0-9])$/;
     const matched = timeString.match(validateRegex);
     const result = {
       validated: false,
@@ -399,8 +396,6 @@ export default class LiveScheduleManager extends React.Component {
             })
           }
         </div>
-
-
       </div>
 
     )

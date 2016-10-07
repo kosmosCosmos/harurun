@@ -1,5 +1,4 @@
 /* eslint-disable no-alert, no-console */
-
 import StockRoomsStorage from '../storage/StockRoomsStorage';
 import SchedulesStorage from '../storage/ScheduleStorage';
 import UserStorage from '../storage/UserStorage';
