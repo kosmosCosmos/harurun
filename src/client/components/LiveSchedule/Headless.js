@@ -1,5 +1,6 @@
 import React from 'react';
 import marked from 'marked';
+import parseScheduleTime from '../common/parseScheduleTime';
 
 const renderScheduleList = () => {
   // build mdText
@@ -11,7 +12,25 @@ const renderScheduleList = () => {
   const mdTextHeader = '|日期 |时间 |节目 |\n|:---|:---|:---|';
   const mdText = schedules.reduce((a, b) => {
     const dateStr = b.date.replace(/^\d+-/, '').replace('-', '/');
-    const bStr = `| ${dateStr} ${b.roomAlias} | ${b.time} | ${b.description} |`;
+
+    // build time string by local timezone
+    const scheduleTime = parseScheduleTime(b.time);
+    // for output schedule png use china timezone
+    const currentTimezoneOffset = -480;
+    const hourOffset = (-540 - currentTimezoneOffset) / 60;
+    let { startHour, endHour, startMinute, endMinute } = scheduleTime.data;
+    startHour = +startHour + hourOffset;
+    endHour = +endHour + hourOffset;
+
+    if (startHour < 0) {
+      startHour = 24 + startHour;
+    }
+    if (endHour < 0) {
+      endHour = 24 + endHour;
+    }
+    const timeString = `${startHour}:${startMinute}~${endHour}:${endMinute}`;
+
+    const bStr = `| ${dateStr} ${b.roomAlias} | ${timeString} | ${b.description} |`;
     const next = a + '\n' + bStr;
     return next;
   }, mdTextHeader);

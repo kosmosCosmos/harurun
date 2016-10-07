@@ -4,6 +4,7 @@ import { Card, CardActions, CardHeader, CardTitle, CardText } from 'material-ui/
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
+import parseScheduleTime from '../common/parseScheduleTime';
 
 const ScheduleMetadata = [
   {
@@ -94,7 +95,24 @@ const renderScheduleList = () => {
 
   const mdText = schedules.reduce((a, b) => {
     const dateStr = b.date.replace(/^\d+-/, '').replace('-', '/');
-    const bStr = `| ${dateStr} ${b.roomAlias} | ${b.time} | ${b.description} |`;
+
+    // build time string by local timezone
+    const scheduleTime = parseScheduleTime(b.time);
+    const currentTimezoneOffset = new Date().getTimezoneOffset();
+    const hourOffset = (-540 - currentTimezoneOffset) / 60;
+    let { startHour, endHour, startMinute, endMinute } = scheduleTime.data;
+    startHour = +startHour + hourOffset;
+    endHour = +endHour + hourOffset;
+
+    if (startHour < 0) {
+      startHour = 24 + startHour;
+    }
+    if (endHour < 0) {
+      endHour = 24 + endHour;
+    }
+    const timeString = `${startHour}:${startMinute}~${endHour}:${endMinute}`;
+
+    const bStr = `| ${dateStr} ${b.roomAlias} | ${timeString} | ${b.description} |`;
     const next = a + '\n' + bStr;
     return next;
   }, mdTextHeader);
