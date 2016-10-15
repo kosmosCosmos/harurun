@@ -3,8 +3,7 @@
  https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html
  ☐ // todo move cachefilepath to config.json
  ☐ // todo extract persist/recover method
+ ☐ add web app support
 
-
-
-
+ ✔ fit smart device view @done (16-10-15 16:30)
  ✔ clear unused packages @done (16-10-07 15:26)
