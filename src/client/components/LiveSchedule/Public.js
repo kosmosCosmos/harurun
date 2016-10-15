@@ -204,7 +204,7 @@ const LiveSchedulePublic = (props) => (
     <Paper className="page">
       <div className="row center-xs center-sm center-md center-lg">
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          Powered by <a href="https://github.com/larvata/tentoumu-chu">tentoumu-chu</a>
+          Powered by <a href="https://github.com/larvata/harurun">harurun</a>
         </div>
       </div>
     </Paper>
