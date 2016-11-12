@@ -15,8 +15,12 @@ const getRoomInfoPromise = (room) =>
       try {
         roomInfo = JSON.parse(body).data;
       }
-      catch(e) {
+      catch (e) {
         return reject(e);
+      }
+
+      if (!roomInfo) {
+        return reject(new Error('zhanqi responed an empty room info body'));
       }
 
       const result = {
@@ -28,7 +32,7 @@ const getRoomInfoPromise = (room) =>
         alias: room.alias,
       };
 
-      resolve(result);
+      return resolve(result);
     });
   });
 
