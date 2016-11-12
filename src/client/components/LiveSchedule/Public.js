@@ -146,7 +146,7 @@ const LiveSchedulePublic = (props) => (
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div className="headerBanner row start-xs start-sm start-md start-lg" >
             <div className="headerImage col-xs-0 col-sm-0 col-md-5 col-lg-6">
-              <img alt="discography image" src="images/single8th.jpg" />
+              <img alt="discography image" src="images/akb_single46th.jpg" />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-7 col-lg-6">
 
@@ -175,7 +175,7 @@ const LiveSchedulePublic = (props) => (
               <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-                  <a target="__blank" href="/downloads/gyaruppi_1.0.7.crx">
+                  <a target="__blank" href="/downloads/gyaruppi_1.0.9.crx">
                     <FlatButton
                       style={{ width: 96, height: 96 }}
                       icon={<img src="/images/app-chromium.png" />}
