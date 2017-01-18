@@ -39,6 +39,25 @@ const ScheduleMetadata = [
 
 ];
 
+const inlineInstall = () => {
+  const { chrome } = window;
+
+  if (chrome) {
+    console.log('before call');
+    chrome.webstore.install('https://chrome.google.com/webstore/detail/ghnfiadioahomhmocmhgjhpmhcmcggjg', ()=>{
+      console.log('success');
+      console.log(arguments);
+    },
+    (err) => {
+      console.log('fail');
+      console.log(err);
+    });
+  }
+  else {
+    window.open('https://chrome.google.com/webstore/detail/ghnfiadioahomhmocmhgjhpmhcmcggjg');
+  }
+};
+
 const renderPerformancePanels = () => {
 
   return ScheduleMetadata.map(meta => {
@@ -186,7 +205,7 @@ const LiveSchedulePublic = (props) => (
                   <div>兼容Chromium系浏览器</div>
                 </div>
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                  <a target="__blank" href="https://chrome.google.com/webstore/detail/gyaruppi/ghnfiadioahomhmocmhgjhpmhcmcggjg">
+                  <a target="__blank" onClick={inlineInstall}>
                     <FlatButton
                       style={{ width: 96, height: 96 }}
                       icon={<img src="/images/app-webstore.png" />}
