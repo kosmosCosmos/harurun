@@ -41,15 +41,12 @@ const ScheduleMetadata = [
 
 const inlineInstall = () => {
   const { chrome } = window;
-
   if (chrome) {
     console.log('before call');
-    chrome.webstore.install('https://chrome.google.com/webstore/detail/ghnfiadioahomhmocmhgjhpmhcmcggjg', ()=>{
-      console.log('success');
-      console.log(arguments);
+    chrome.webstore.install('https://chrome.google.com/webstore/detail/ghnfiadioahomhmocmhgjhpmhcmcggjg', () => {
+      console.log('inline install success');
     },
     (err) => {
-      console.log('fail');
       console.log(err);
     });
   }
@@ -189,12 +186,12 @@ const LiveSchedulePublic = (props) => (
 
         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3" style={{ paddingBottom: 16 }}>
           <Card className="box">
-            <CardTitle title="浏览器插件下载" />
+            <CardTitle title="浏览器插件下载(v1.0.10)" />
             <CardText>
               <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-                  <a target="__blank" href="/downloads/gyaruppi_1.0.9.crx">
+                  <a target="__blank" href="/downloads/gyaruppi_1.0.10.crx">
                     <FlatButton
                       style={{ width: 96, height: 96 }}
                       icon={<img src="/images/app-chromium.png" />}
