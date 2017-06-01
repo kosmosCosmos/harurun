@@ -28,7 +28,7 @@ const getRoomInfoPromise = (room) =>
         provider: room.provider,
         highlight: !!room.highlight,
         title: roomInfo.title,
-        domain: roomInfo.domain,
+        url: roomInfo.url,
         alias: room.alias,
       };
 

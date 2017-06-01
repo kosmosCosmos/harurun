@@ -42,9 +42,7 @@ const ScheduleMetadata = [
 const inlineInstall = () => {
   const { chrome } = window;
   if (chrome) {
-    console.log('before call');
     chrome.webstore.install('https://chrome.google.com/webstore/detail/ghnfiadioahomhmocmhgjhpmhcmcggjg', () => {
-      console.log('inline install success');
     },
     (err) => {
       console.log(err);
@@ -145,7 +143,7 @@ const renderRoomButtons = () => {
   }
 
   return rooms.map(room => {
-    const url = `http://www.zhanqi.tv/${room.domain}`;
+    const url = `http://www.zhanqi.tv${room.url}`;
     return (
       <a key={room.id} target="_blank" href={url}>
         <RaisedButton label={room.title} secondary={room.highlight} />
@@ -162,7 +160,7 @@ const LiveSchedulePublic = (props) => (
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div className="headerBanner row start-xs start-sm start-md start-lg" >
             <div className="headerImage col-xs-0 col-sm-0 col-md-5 col-lg-6">
-              <img alt="discography image" src="images/akb_single46th.jpg" />
+              <img alt="discography image" src="images/akb_single48th.jpg" />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-7 col-lg-6">
 
@@ -186,12 +184,12 @@ const LiveSchedulePublic = (props) => (
 
         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3" style={{ paddingBottom: 16 }}>
           <Card className="box">
-            <CardTitle title="浏览器插件下载(v1.0.10)" />
+            <CardTitle title="浏览器插件下载(v1.1.1)" />
             <CardText>
               <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-                  <a target="__blank" href="/downloads/gyaruppi_1.0.10.crx">
+                  <a target="__blank" href="/downloads/gyaruppi_1.1.1.crx">
                     <FlatButton
                       style={{ width: 96, height: 96 }}
                       icon={<img src="/images/app-chromium.png" />}

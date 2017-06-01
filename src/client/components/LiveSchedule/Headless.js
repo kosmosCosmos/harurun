@@ -40,10 +40,18 @@ const renderScheduleList = () => {
   );
 };
 
+const renderFootnote = () => {
+  const { schedules: { timestamp } } = window.store;
+  const ts = new Date(timestamp);
+  const timeString = ts.toLocaleString('zh');
+  return (<div className="footnote">更新于：{timeString}</div>);
+};
+
 const HeadlessScheduleList = (props) => (
   <div>
     <div className="propTypeDescription" style={{ paddingTop: '0px' }}>
       {renderScheduleList()}
+      {renderFootnote()}
     </div>
   </div>
 );
