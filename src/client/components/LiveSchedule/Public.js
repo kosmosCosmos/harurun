@@ -189,7 +189,7 @@ const LiveSchedulePublic = (props) => (
               <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-                  <a target="__blank" href="/downloads/gyaruppi_1.1.1.crx">
+                  <a target="__blank" href="/downloads/gyaruppi_1.1.2.crx">
                     <FlatButton
                       style={{ width: 96, height: 96 }}
                       icon={<img src="/images/app-chromium.png" />}
