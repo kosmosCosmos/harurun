@@ -13,7 +13,8 @@ export default function (req, res, next) {
     extensionVersion,
     schedulesVersion,
     stockRoomsVersion,
-    userDetails,
+    version,
+    usage,
   } = req.body;
 
   const result = {
@@ -50,8 +51,11 @@ export default function (req, res, next) {
   }
 
   // update user info to storage
-  const currentUser = userDetails || {};
-  currentUser.uid = uid;
+  const currentUser = {
+    uid,
+    version,
+    usage,
+  };
   UserStorage.set(currentUser);
 
   res.send(result);
