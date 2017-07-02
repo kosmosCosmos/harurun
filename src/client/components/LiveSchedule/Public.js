@@ -184,12 +184,12 @@ const LiveSchedulePublic = (props) => (
 
         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3" style={{ paddingBottom: 16 }}>
           <Card className="box">
-            <CardTitle title="浏览器插件下载(v1.1.3)" />
+            <CardTitle title="浏览器插件下载(v1.2.0)" />
             <CardText>
               <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-                  <a target="__blank" href="/downloads/gyaruppi_1.1.3.crx">
+                  <a target="__blank" href="/downloads/gyaruppi_1.2.0.crx">
                     <FlatButton
                       style={{ width: 96, height: 96 }}
                       icon={<img src="/images/app-chromium.png" />}
